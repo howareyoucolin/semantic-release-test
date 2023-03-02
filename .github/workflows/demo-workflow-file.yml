@@ -1,14 +1,16 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+name: CI
+on: push
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-16.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
-      - run: echo 'Hello BBBBBBB'
+          node-version: '12'
+      - run: npm ci
+      - run: npm test
+      - name: Release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
