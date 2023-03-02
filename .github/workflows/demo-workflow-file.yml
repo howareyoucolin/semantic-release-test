@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+      - name: Install Stuff
+        run: 'npm ci'
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
