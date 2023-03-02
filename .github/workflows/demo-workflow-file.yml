@@ -10,5 +10,5 @@ jobs:
           node-version: '18'
       - name: Release
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: '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'
         run: npx semantic-release
